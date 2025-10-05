@@ -7,7 +7,8 @@ import com.example.lab_week_06.model.CatModel
 
 class CatAdapter(
     private val layoutInflater: LayoutInflater,
-    private val imageLoader: ImageLoader
+    private val imageLoader: ImageLoader,
+    private val onClickListener: OnClickListener
 ) : RecyclerView.Adapter<CatViewHolder>() {
 
     // Mutable list untuk menyimpan semua data kucing
@@ -24,7 +25,7 @@ class CatAdapter(
     // Buat ViewHolder (inflate layout untuk tiap item list)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
         val view = layoutInflater.inflate(R.layout.item_cat, parent, false)
-        return CatViewHolder(view, imageLoader)
+        return CatViewHolder(view, imageLoader, onClickListener)
     }
 
     // Jumlah item dalam list
@@ -33,5 +34,10 @@ class CatAdapter(
     // Binding data ke tiap item tampilan
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
         holder.bindData(cats[position])
+    }
+
+    // 👇 Interface untuk klik item
+    interface OnClickListener {
+        fun onItemClick(cat: CatModel)
     }
 }
