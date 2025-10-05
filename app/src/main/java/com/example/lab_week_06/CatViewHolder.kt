@@ -13,6 +13,7 @@ private val FEMALE_SYMBOL = "\u2640"
 private val MALE_SYMBOL = "\u2642"
 private const val UNKNOWN_SYMBOL = "?"
 
+
 class CatViewHolder(
     private val containerView: View,
     private val imageLoader: ImageLoader,
