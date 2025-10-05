@@ -17,8 +17,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val catAdapter by lazy {
-        // Glide digunakan untuk load image
-        // Di sini kita juga meneruskan listener ke adapter
+
         CatAdapter(
             layoutInflater,
             GlideImageLoader(this),
@@ -40,11 +39,9 @@ class MainActivity : AppCompatActivity() {
             false
         )
 
-        // 🌀 Tambahkan SWIPE gesture (👇 ini bagian penting)
         val itemTouchHelper = ItemTouchHelper(catAdapter.swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
-        // 🐱 Tambahkan data ke adapter
         catAdapter.setData(
             listOf(
                 CatModel(
@@ -67,12 +64,60 @@ class MainActivity : AppCompatActivity() {
                     name = "Curious George",
                     biography = "Award winning investigator",
                     imageUrl = "https://cdn2.thecatapi.com/images/bar.jpg"
+                ),
+                CatModel(
+                    gender = Gender.MALE,
+                    breed = CatBreed.BIRMAN,
+                    name = "Snowy",
+                    biography = "Loves warm blankets",
+                    imageUrl = "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg"
+                ),
+                CatModel(
+                    gender = Gender.FEMALE,
+                    breed = CatBreed.ABYSSINIAN,
+                    name = "Mimi",
+                    biography = "Always curious",
+                    imageUrl = "https://cdn2.thecatapi.com/images/0XYvRd7oD.png"
+                ),
+                CatModel(
+                    gender = Gender.MALE,
+                    breed = CatBreed.AMERICAN_BOBTAIL,
+                    name = "Leo",
+                    biography = "Tiny lion of the house",
+                    imageUrl = "https://cdn2.thecatapi.com/images/hBXicehMA.jpg"
+                ),
+                CatModel(
+                    gender = Gender.UNKNOWN,
+                    breed = CatBreed.BENGAL,
+                    name = "Tiger",
+                    biography = "Fast and playful",
+                    imageUrl = "https://cdn2.thecatapi.com/images/O3btzLlsO.jpg"
+                ),
+                CatModel(
+                    gender = Gender.FEMALE,
+                    breed = CatBreed.CHARTEUX,
+                    name = "Luna",
+                    biography = "Loves moonlight naps",
+                    imageUrl = "https://cdn2.thecatapi.com/images/j5cVSqLer.jpg"
+                ),
+                CatModel(
+                    gender = Gender.MALE,
+                    breed = CatBreed.CYM,
+                    name = "Rocky",
+                    biography = "Rocks the house",
+                    imageUrl = "https://cdn2.thecatapi.com/images/3bkZAjRhj.jpg"
+                ),
+                CatModel(
+                    gender = Gender.UNKNOWN,
+                    breed = CatBreed.MAINE_COON,
+                    name = "Fluffy",
+                    biography = "King of floof",
+                    imageUrl = "https://cdn2.thecatapi.com/images/OOF09xL4N.jpg"
                 )
             )
         )
     }
 
-    // 📝 Fungsi pop-up dialog saat item diklik
     private fun showSelectionDialog(cat: CatModel) {
         AlertDialog.Builder(this)
             .setTitle("Cat Selected")

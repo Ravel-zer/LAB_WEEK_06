@@ -8,35 +8,23 @@ import com.example.lab_week_06.model.CatBreed
 import com.example.lab_week_06.model.CatModel
 import com.example.lab_week_06.model.Gender
 
-private val FEMALE_SYMBOL = "\u2640"   // ♀
-private val MALE_SYMBOL = "\u2642"     // ♂
+private val FEMALE_SYMBOL = "\u2640"
+private val MALE_SYMBOL = "\u2642"
 private const val UNKNOWN_SYMBOL = "?"
 
 class CatViewHolder(
     private val containerView: View,
     private val imageLoader: ImageLoader,
-    private val onClickListener: CatAdapter.OnClickListener   // ✅ perhatikan ini
+    private val onClickListener: CatAdapter.OnClickListener
 ) : RecyclerView.ViewHolder(containerView) {
 
-    private val catBiographyView: TextView by lazy {
-        containerView.findViewById(R.id.cat_biography)
-    }
-    private val catBreedView: TextView by lazy {
-        containerView.findViewById(R.id.cat_breed)
-    }
-    private val catGenderView: TextView by lazy {
-        containerView.findViewById(R.id.cat_gender)
-    }
-    private val catNameView: TextView by lazy {
-        containerView.findViewById(R.id.cat_name)
-    }
-    private val catPhotoView: ImageView by lazy {
-        containerView.findViewById(R.id.cat_photo)
-    }
+    private val catPhotoView: ImageView by lazy { containerView.findViewById(R.id.cat_image) }
+    private val catNameView: TextView by lazy { containerView.findViewById(R.id.cat_name) }
+    private val catBreedView: TextView by lazy { containerView.findViewById(R.id.cat_breed) }
+    private val catBiographyView: TextView by lazy { containerView.findViewById(R.id.cat_bio) }
 
     fun bindData(cat: CatModel) {
 
-        // ✅ Pasang listener click di item
         containerView.setOnClickListener {
             onClickListener.onItemClick(cat)
         }
@@ -48,14 +36,16 @@ class CatViewHolder(
             CatBreed.AMERICAN_CURL -> "American Curl"
             CatBreed.BALINESE_JAVANESE -> "Balinese-Javanese"
             CatBreed.EXOTIC_SHORTHAIR -> "Exotic Shorthair"
+            CatBreed.BIRMAN -> "Birman"
+            CatBreed.ABYSSINIAN -> "Abyssinian"
+            CatBreed.AMERICAN_BOBTAIL -> "American Bobtail"
+            CatBreed.BENGAL -> "Bengal"
+            CatBreed.CHARTEUX -> "Charteux"
+            CatBreed.CYM -> "Cymric"
+            CatBreed.MAINE_COON -> "Maine Coon"
+            else -> "Unknown"
         }
 
         catBiographyView.text = cat.biography
-
-        catGenderView.text = when (cat.gender) {
-            Gender.FEMALE -> FEMALE_SYMBOL
-            Gender.MALE -> MALE_SYMBOL
-            Gender.UNKNOWN -> UNKNOWN_SYMBOL
-        }
     }
 }

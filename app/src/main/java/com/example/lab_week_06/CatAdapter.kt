@@ -12,20 +12,16 @@ class CatAdapter(
     private val onClickListener: OnClickListener
 ) : RecyclerView.Adapter<CatViewHolder>() {
 
-    // 🟡 Delete Callback Instantiation (✨ ini bagian yang kamu maksud)
     val swipeToDeleteCallback = SwipeToDeleteCallback()
 
-    // 🐱 Mutable list untuk menyimpan semua data kucing
     private val cats = mutableListOf<CatModel>()
 
-    // Fungsi untuk mengganti isi list dengan data baru
     fun setData(newCats: List<CatModel>) {
         cats.clear()
         cats.addAll(newCats)
         notifyDataSetChanged()
     }
 
-    // Fungsi untuk menghapus item saat swipe
     fun removeItem(position: Int) {
         if (position in cats.indices) {
             cats.removeAt(position)
@@ -33,7 +29,6 @@ class CatAdapter(
         }
     }
 
-    // Inflate layout tiap item
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
         val view = layoutInflater.inflate(R.layout.item_cat, parent, false)
         return CatViewHolder(view, imageLoader, onClickListener)
@@ -45,7 +40,6 @@ class CatAdapter(
         holder.bindData(cats[position])
     }
 
-    // Interface klik item
     interface OnClickListener {
         fun onItemClick(cat: CatModel)
     }
@@ -76,8 +70,10 @@ class CatAdapter(
         }
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-            val position = viewHolder.adapterPosition
-            removeItem(position)
+            val position = viewHolder.bindingAdapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                removeItem(position)
+            }
         }
     }
 }
