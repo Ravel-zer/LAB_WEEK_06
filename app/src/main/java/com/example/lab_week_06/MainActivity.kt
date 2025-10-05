@@ -3,6 +3,7 @@ package com.example.lab_week_06
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lab_week_06.model.CatBreed
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Setup RecyclerView
+        // 🛠️ Setup RecyclerView
         recyclerView.adapter = catAdapter
         recyclerView.layoutManager = LinearLayoutManager(
             this,
@@ -39,7 +40,11 @@ class MainActivity : AppCompatActivity() {
             false
         )
 
-        // Tambahkan data ke adapter
+        // 🌀 Tambahkan SWIPE gesture (👇 ini bagian penting)
+        val itemTouchHelper = ItemTouchHelper(catAdapter.swipeToDeleteCallback)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+
+        // 🐱 Tambahkan data ke adapter
         catAdapter.setData(
             listOf(
                 CatModel(
@@ -67,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    // Fungsi untuk menampilkan pop-up dialog ketika item di klik
+    // 📝 Fungsi pop-up dialog saat item diklik
     private fun showSelectionDialog(cat: CatModel) {
         AlertDialog.Builder(this)
             .setTitle("Cat Selected")
